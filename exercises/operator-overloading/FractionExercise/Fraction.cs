@@ -36,6 +36,15 @@ namespace FractionExercise
             return !object.ReferenceEquals(that, null) && this.Numerator == that.Numerator && this.Denominator == that.Denominator;
         }
 
+        public static bool operator ==(Fraction a, Fraction b)
+        {
+            return a.Equals(b);
+        }
+        public static bool operator !=(Fraction a, Fraction b)
+        {
+            return !a.Equals(b);
+        }
+
         public override int GetHashCode()
         {
             return this.Numerator ^ this.Denominator;
@@ -56,6 +65,11 @@ namespace FractionExercise
             return new Fraction(numer, denom);
         }
 
+        public static Fraction operator +(Fraction a, Fraction b)
+        {
+            return a.Add(b);
+        }
+
         public Fraction Negate()
         {
             var a = this;
@@ -63,11 +77,21 @@ namespace FractionExercise
             return new Fraction(-a.Numerator, a.Denominator);
         }
 
+        public static Fraction operator -(Fraction a)
+        {
+            return a.Negate();
+        }
+
         public Fraction Subtract(Fraction b)
         {
             var a = this;
 
             return a.Add(b.Negate());
+        }
+
+        public static Fraction operator -(Fraction a, Fraction b)
+        {
+            return a.Subtract(b);
         }
 
         public Fraction Multiply(Fraction b)
@@ -79,11 +103,21 @@ namespace FractionExercise
             return new Fraction(numer, denom);
         }
 
+        public static Fraction operator *(Fraction a, Fraction b)
+        {
+            return a.Multiply(b);
+        }
+
         public Fraction Divide(Fraction b)
         {
             var a = this;
 
             return a.Multiply(b.Invert());
+        }
+
+        public static Fraction operator /(Fraction a, Fraction b)
+        {
+            return a.Divide(b);
         }
     }
 }
